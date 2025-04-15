@@ -76,7 +76,7 @@ const render = async () =>
  * The detailed page of the single player should no longer be shown.
  * @param {Object} player an object representing a single player
  */
-const renderSinglePlayer = (player,idx) => {
+const renderSinglePlayer = (player) => {
   puppyList.innerHTML = 
      `<div>
           <h1> ${player.name}</h1>
@@ -168,7 +168,7 @@ const addNewPlayer = async (newPlayer) => {
     });
     const puppyData = await response.json();
     console.log(puppyData);
-    puppyPlayers.push(puppyData.data.player);
+    puppyPlayers.push(puppyData.data.players);
     render();
   } catch (error) {
     console.error("Error adding new player:", error);

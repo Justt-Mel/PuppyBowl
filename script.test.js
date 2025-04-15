@@ -24,6 +24,12 @@ describe("fetchAllPlayers", () => {
 });
 
 // TODO: Tests for `fetchSinglePlayer`
-
+describe("fetchSinglePlayer", () => {
+  let players;
+  beforeAll(async () => {
+    players = await fetchSinglePlayer();
+  });
+  test()
+})
 // TODO: Tests for `addNewPlayer`
 
