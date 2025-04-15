@@ -1,3 +1,6 @@
+body{
+  background-color: darkolivegreen;
+}
 *{
   padding: 0;
   margin: 0;
@@ -5,6 +8,35 @@
 }
 
 img{
-  width: 33%;
-  height: 33%;
+  width: 10rem;
+  height: 15rem;
+}
+/*CSS for list of puppy players*/
+#playerList{
+  background-color:dimgray;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  border: 3px solid black;
+  margin: 5%;
+}
+#playerList > div {
+  margin:20px;
+  border: black solid;
+  background-color: darkslategray;
+}
+
+/*css for the puppy form*/
+.puppyForm{
+  display: flex;
+  justify-content: center;
+}
+#addPuppy{
+  padding: 10px;
+  border: 3px solid black;
+  
+}
+#addPuppy > div{
+  padding: 10px;
+  margin: 20px;
 }

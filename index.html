@@ -11,6 +11,35 @@
   <body>
     <h1>Welcome to Puppy Bowl!</h1>
     <!--Don't be afraid to add stuff to your HTML as needed!-->
-    
+    <div class ="puppyForm">   
+     <form id="addPuppy">
+      <div>
+        <label>Puppies Name</label>
+        <input type="text" name = "name" required>
+      </div>
+      <div>
+        <label>Puppies Breed</label>
+        <input type="text" name = "Breed" required>
+      </div>
+      <div>
+        <label>Puppies Activity</label>
+        <input type="radio" name = "Activity" value="Benched" checked>
+        <label>Benched</label>
+        <input type="radio" name = "Activity" value="Field">
+        <label>Field</label>
+      </div>
+      <div>
+        <label>Puppies Photo</label>
+        <input type="url" name = "puppyImg">
+      </div>
+      <div>
+        <label>Puppies Team</label>
+        <input type="number" name = "teamId">
+      </div>
+      <button type="submit">Enter</button>
+     </form>
+    </div>
+
+    <div id="playerList"></div>
   </body>
 </html>
