@@ -84,7 +84,6 @@ const renderSinglePlayer = (player,idx) => {
           <p>${player.breed}</p>
           <img src ="${player.imageUrl}" alt="${player.name}"/>
           <p>${player.teamId ? `Team ID: ${player.teamId} <br/>Assigned` :`No Team <br/> Unassigned`}</p>
-          <button class = "deleteButton" id = ${player.id} data-puppyIndex =${idx}>Delete Puppy Player</button>
           </br>
           <a href ="#">Go Back to list</a>
      </div>`
@@ -99,7 +98,7 @@ const fetchAllPlayers = async () =>
 {
 try 
 {
- const response = await fetch("https://fsa-puppy-bowl.herokuapp.com/api/2501-PUPPIES/players") 
+ const response = await fetch("https://fsa-puppy-bowl.herokuapp.com/api/2501am-PUPPIES/players") 
  const json = await response.json()
  puppyPlayers = json.data.players 
  //console.log(puppyPlayers)
@@ -117,7 +116,7 @@ try
  */
 const fetchSinglePlayer = async (playerId) => {
   try {
-    const response = await fetch(`https://fsa-puppy-bowl.herokuapp.com/api/2501-PUPPIES/players/${playerId}`);
+    const response = await fetch(`https://fsa-puppy-bowl.herokuapp.com/api/2501am-PUPPIES/players/${playerId}`);
     const singlePupData = await response.json();
     console.log(singlePupData);
     renderSinglePlayer(singlePupData.data.player);
@@ -144,10 +143,36 @@ const fetchSinglePlayer = async (playerId) => {
  * FOR TESTING PURPOSES ONLY PLEASE OBSERVE THIS SECTION
  * @returns {Object} the new player object added to database
  */
-
+addPuppy.addEventListener("submit", async (newPup) => 
+{
+ newPup.preventDefault();
+ const formData = new FormData(newPup.target);
+ const addingPup = {
+  name: formData.get("name") || "",
+  breed: formData.get("breed") || "",
+  status: formData.get("status") || "", 
+  imageUrl: formData.get("imageUrl") || "",
+  teamId: formData.get("teamId") || null
+ }; 
+ console.log(addingPup);
+ await addNewPlayer(addingPup);
+});
 const addNewPlayer = async (newPlayer) => {
-  
-  
+  try {
+    const response = await fetch("https://fsa-puppy-bowl.herokuapp.com/api/2501am-PUPPIES/players", {
+      method: "POST",
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(newPlayer)
+    });
+    const puppyData = await response.json();
+    console.log(puppyData);
+    puppyPlayers.push(puppyData.data.player);
+    render();
+  } catch (error) {
+    console.error("Error adding new player:", error);
+  }
 };
 
 /**
@@ -163,17 +188,25 @@ const addNewPlayer = async (newPlayer) => {
 /**
  * Note#2: Don't be afraid to add parameters to this function if you need to!
  */
-puppyList.addEventListener("click", (list,idx) => 
+puppyList.addEventListener("click", (list) => 
 {
   if (list.target.classList.contains("deleteButton"))
   {
     console.log("pressed delete")
     console.log(list.target)
+    removePlayer(list.target.id, list.target.dataset.puppyindex)
   }
 })
-const removePlayer = async (playerId) => {
-  
-
+const removePlayer = async (playerId,idx) => {
+  try {
+    await fetch(`https://fsa-puppy-bowl.herokuapp.com/api/2501am-PUPPIES/players/${playerId}`, {
+        method: "DELETE"
+    })
+    puppyPlayers.splice(idx, 1)
+    render()
+} catch (error) {
+    console.error(error)
+}
 };
 
 /**
