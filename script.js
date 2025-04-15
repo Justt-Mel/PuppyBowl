@@ -146,13 +146,12 @@ const fetchSinglePlayer = async (playerId) => {
 addPuppy.addEventListener("submit", async (newPup) => 
 {
  newPup.preventDefault();
- const formData = new FormData(newPup.target);
  const addingPup = {
-  name: formData.get("name") || "",
-  breed: formData.get("breed") || "",
-  status: formData.get("status") || "", 
-  imageUrl: formData.get("imageUrl") || "",
-  teamId: formData.get("teamId") || null
+  name: newPup.target.name.value,
+  breed: newPup.target.breed.value,
+  status: newPup.target.status.value,
+  imageUrl: newPup.target.imageUrl.value,
+  teamId: newPup.target.teamId.value
  }; 
  console.log(addingPup);
  await addNewPlayer(addingPup);
@@ -168,7 +167,7 @@ const addNewPlayer = async (newPlayer) => {
     });
     const puppyData = await response.json();
     console.log(puppyData);
-    puppyPlayers.push(puppyData.data.players);
+    puppyPlayers.push(puppyData.data);
     render();
   } catch (error) {
     console.error("Error adding new player:", error);

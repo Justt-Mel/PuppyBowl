@@ -11,7 +11,9 @@
   <body>
     <h1>Welcome to Puppy Bowl!</h1>
     <!--Don't be afraid to add stuff to your HTML as needed!-->
-     <form id="addPuppy">
+  <div class="puppyForm">
+    <form id="addPuppy">
+      <h1>Add A Puppy Player </h1>
       <div>
         <label>Puppies Name</label>
         <input type="text" name = "name" required>
@@ -22,7 +24,10 @@
       </div>
       <div>
         <label>Puppies Activity</label>
-        <input type="text" name="status" value ="benched">
+        <select name="status" required>
+          <option value="benched">Benched</option>
+          <option value="active">Active</option>
+        </select>
       </div>
       <div>
         <label>Puppies Photo</label>
@@ -34,7 +39,7 @@
       </div>
       <button type="submit">Add</button>
      </form>
-
-    <div id="playerList"></div>
+    </div>
+  <div id="playerList"></div>
   </body>
 </html>
