@@ -166,8 +166,8 @@ const addNewPlayer = async (newPlayer) => {
       body: JSON.stringify(newPlayer)
     });
     const puppyData = await response.json();
-    console.log(puppyData);
-    puppyPlayers.push(puppyData.data);
+    console.log(puppyData.data);
+    puppyPlayers.push(puppyData.data.newPlayer);
     render();
   } catch (error) {
     console.error("Error adding new player:", error);
